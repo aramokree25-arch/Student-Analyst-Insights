@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Meet the Team — Student Analyst Insights</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="assets/logo.png"/>
+  <!-- Team-only styles so you don't have to touch styles.css -->
+  <style>
+    .team-title{font-size:32px;margin:0 0 10px}
+    .team-section{padding-top:22px}
+    .member{display:grid;grid-template-columns:140px 1fr;gap:18px 22px;align-items:start;padding:18px 0;border-bottom:1px solid var(--border)}
+    .member:last-child{border-bottom:0}
+    .avatar{width:140px;height:140px;object-fit:cover;border-radius:999px;border:1px solid var(--border);background:#eef2f7}
+    .bio{display:grid;gap:6px}
+    .name{margin:0;font-size:22px}
+    .role{color:var(--muted);font-weight:400;font-size:16px}
+    .school{margin:0;color:var(--muted)}
+    .blurb{margin:6px 0 0;line-height:1.6}
+    .contact{margin:8px 0 0;display:flex;gap:14px;align-items:center}
+    .contact a{text-decoration:none}
+    .contact .email{color:var(--brand)}
+    .social{display:inline-flex;align-items:center;gap:6px;padding:8px 10px;border:1px solid var(--border);border-radius:999px;background:#fff;color:inherit}
+    .social:hover{border-color:#c8cbd4}
+    .icon{width:18px;height:18px;fill:currentColor}
+    @media (max-width:700px){.member{grid-template-columns:80px 1fr}.avatar{width:80px;height:80px}}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html"><img src="assets/logo.png" alt="logo"><span>Student Analyst Insights</span></a>
+      <button id="navToggle" class="nav-toggle" aria-label="Toggle menu">☰</button>
+      <nav class="menu" id="menu">
+        <a class="menu-item" href="index.html">Home</a>
+        <a class="menu-item" href="articles.html">Articles</a>
+        <a class="menu-item active" href="team.html">Meet the Team</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero"></section>
+
+  <main class="container">
+    <section class="panel team-section">
+      <h1 class="team-title">Meet the Team</h1>
+
+      <!-- Founder (you) -->
+      <article class="member">
+        <img class="avatar" src="assets/team-founder.jpg" alt="Headshot coming soon">
+        <div class="bio">
+          <h3 class="name">Ara Mokree <span class="role">• Founder</span></h3>
+          <p class="school">Imperial College London - MSc Advanced Chemical Engineering</p>
+          <p class="blurb">
+            Bio coming soon.
+          </p>
+          <p class="contact">
+            <a class="social" href="https://www.linkedin.com/in/aramokree/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="icon">
+                <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V23h-4V8.5zm7 0h3.8v1.98h.05c.53-.95 1.82-1.95 3.75-1.95 4.01 0 4.75 2.64 4.75 6.07V23h-4v-5.9c0-1.41-.03-3.22-1.96-3.22-1.96 0-2.26 1.53-2.26 3.11V23h-4V8.5z"/>
+              </svg>
+              LinkedIn
+            </a>
+            <a class="email" href="mailto:YOUR_EMAIL">EMAIL</a>
+          </p>
+        </div>
+      </article>
+
+      <!-- Add more members by copying a <article class="member"> block -->
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Student Analyst Insights</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('navToggle')
+      .addEventListener('click',()=>document.getElementById('menu').classList.toggle('open'));
+    document.getElementById('year').textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>

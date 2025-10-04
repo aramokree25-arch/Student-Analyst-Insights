@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Market Recap — Coming Soon — Student Analyst Insights</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="icon" href="../assets/logo.png" />
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="../index.html"><img src="../assets/logo.png" alt="logo"><span>Student Analyst Insights</span></a>
+      <button id="navToggle" class="nav-toggle" aria-label="Toggle menu">☰</button>
+      <nav class="menu" id="menu">
+        <a class="menu-item" href="../index.html">Home</a>
+        <a class="menu-item" href="../articles.html">Articles</a>
+        <a class="menu-item" href="../team.html">Meet the Team</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="post-hero" style="background-image:url('../assets/latest-4.jpg')"></div>
+
+    <article class="panel post-body">
+      <h1>TBC — Coming Soon</h1>
+      <div class="meta">
+        <span>Category: TBC</span>
+        <span>Date: TBC</span>
+        <span>Author: TBD</span>
+        <span>Editor: TBD</span>
+      </div>
+      <hr style="border:none;border-top:1px solid var(--border);margin:14px 0;">
+      <p><em>Coming soon — full article will be published here.</em></p>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Student Analyst Insights</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('menu').classList.toggle('open'));
+    document.getElementById('year').textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>

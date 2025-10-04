@@ -1,0 +1,76 @@
+{
+  "posts": [
+    {
+      "id": "p1",
+      "slug": ".",
+      "category": "TBC",
+      "title": " \u2014 Coming Soon",
+      "subtitle": "Summary coming soon",
+      "hero": "assets/latest-1.jpg",
+      "date": "2025-09-29",
+      "author": "TBD",
+      "editor": "TBD",
+      "path": "posts/market-recap.html"
+    },
+    {
+      "id": "p2",
+      "slug": "highlighted-deal",
+      "category": "Deal of the Month",
+      "title": "Highlighted Deal \u2014 Coming Soon",
+      "subtitle": "Highlights coming soon",
+      "hero": "assets/latest-2.jpg",
+      "date": "2025-09-25",
+      "author": "TBD",
+      "editor": "TBD",
+      "path": "posts/highlighted-deal.html"
+    },
+    {
+      "id": "p3",
+      "slug": "credit-spreads",
+      "category": "Monthly Updates",
+      "title": "Credit Spreads \u2014 Coming Soon",
+      "subtitle": "Overview coming soon",
+      "hero": "assets/latest-3.jpg",
+      "date": "2025-09-20",
+      "author": "TBD",
+      "editor": "TBD",
+      "path": "posts/credit-spreads.html"
+    },
+    {
+      "id": "p4",
+      "slug": "top-3-ideas",
+      "category": "Monthly Updates",
+      "title": "Top 3 Ideas \u2014 Coming Soon",
+      "subtitle": "Details coming soon",
+      "hero": "assets/latest-4.jpg",
+      "date": "2025-09-18",
+      "author": "TBD",
+      "editor": "TBD",
+      "path": "posts/top-3-ideas.html"
+    },
+    {
+      "id": "p5",
+      "slug": "policy-watch",
+      "category": "Deal of the Month",
+      "title": "Policy Watch \u2014 Coming Soon",
+      "subtitle": "Impacts coming soon",
+      "hero": "assets/latest-5.jpg",
+      "date": "2025-09-12",
+      "author": "TBD",
+      "editor": "TBD",
+      "path": "posts/policy-watch.html"
+    },
+    {
+      "id": "p6",
+      "slug": "feature-article",
+      "category": "Monthly Updates",
+      "title": "Feature Article \u2014 Coming Soon",
+      "subtitle": "Analysis coming soon",
+      "hero": "assets/latest-6.jpg",
+      "date": "2025-09-01",
+      "author": "TBD",
+      "editor": "TBD",
+      "path": "posts/feature-article.html"
+    }
+  ]
+}

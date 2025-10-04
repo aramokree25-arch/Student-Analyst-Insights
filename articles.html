@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Articles — Student Analyst Insights</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="assets/logo.png" />
+  <style>
+    .byline{ font-size:12px; color:var(--muted); margin-top:-2px }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html"><img src="assets/logo.png" alt="logo"><span>Student Analyst Insights</span></a>
+      <button id="navToggle" class="nav-toggle" aria-label="Toggle menu">☰</button>
+      <nav class="menu" id="menu">
+        <a class="menu-item" href="index.html">Home</a>
+        <a class="menu-item active" href="articles.html">Articles</a>
+        <a class="menu-item" href="team.html">Meet the Team</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero"></section>
+
+  <main class="container">
+    <section class="panel">
+      <div class="section-head" style="flex-wrap:wrap">
+        <input id="q" class="search" placeholder="Search articles…">
+        <div class="filters" id="categoryPills"></div>
+        <select id="sort" class="select">
+          <option value="date_desc">Newest first</option>
+          <option value="date_asc">Oldest first</option>
+          <option value="title_asc">Title A–Z</option>
+          <option value="title_desc">Title Z–A</option>
+        </select>
+      </div>
+      <div id="articlesGrid" class="card-grid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Student Analyst Insights</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('menu').classList.toggle('open'));
+    document.getElementById('year').textContent=new Date().getFullYear();
+
+    // Inline data for file:// use; you can still keep /data/articles.json
+    const EMBED = {
+  "posts": [
+    {"id":"p1","slug":"market-recap","category":"TBC","title":"Coming Soon","subtitle":"Coming soon","hero":"assets/latest-1.jpg","date":"TBC","authors":["TBC"],"editor":"TBC","path":"posts/market-recap.html"},
+    {"id":"p2","slug":"highlighted-deal","category":"TBC","title":"Coming Soon","subtitle":"Coming soon","hero":"assets/latest-2.jpg","date":"TBC","authors":["TBC"],"editor":"TBC","path":"posts/highlighted-deal.html"},
+    {"id":"p3","slug":"credit-spreads","category":"TBC","title":"Coming Soon","subtitle":"Coming soon","hero":"assets/latest-3.jpg","date":"TBC","authors":["TBC"],"editor":"TBC","path":"posts/credit-spreads.html"},
+    {"id":"p4","slug":"top-3-ideas","category":"TBC","title":"Coming Soon","subtitle":"Coming soon","hero":"assets/latest-4.jpg","date":"TBC","authors":["TBC"],"editor":"TBC","path":"posts/top-3-ideas.html"},
+    {"id":"p5","slug":"policy-watch","category":"TBC","title":"Coming Soon","subtitle":"Coming soon","hero":"assets/latest-5.jpg","date":"TBC","authors":["TBC"],"editor":"TBC","path":"posts/policy-watch.html"},
+    {"id":"p6","slug":"feature-article","category":"TBC","title":"Coming Soon","subtitle":"Coming soon","hero":"assets/latest-6.jpg","date":"TBC","authors":["TBC"],"editor":"TBC","path":"posts/feature-article.html"}
+  ]
+};
+
+    const pillsWrap = document.getElementById('categoryPills');
+    const grid = document.getElementById('articlesGrid');
+    const q = document.getElementById('q');
+    const sort = document.getElementById('sort');
+    let state = { articles:[], cats:[], active:new Set(), q:'', sort:'date_desc' };
+
+    // helpers for byline
+    const fmt = d => new Date(d).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});
+    const byline = p => {
+      const authors = Array.isArray(p.authors) && p.authors.length ? p.authors.join(', ') : (p.author || '—');
+      const ed = p.editor || '—';
+      const dt = p.date ? fmt(p.date) : '—';
+      return `By ${authors} · Edited by ${ed} · ${dt}`;
+    };
+
+    function renderPills(allCats){
+      const unique = Array.from(new Set(allCats)).filter(Boolean);
+      pillsWrap.innerHTML = unique.map(c=>`<button class="pill" data-cat="${c}">${c}</button>`).join('');
+      pillsWrap.querySelectorAll('.pill').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const cat = btn.getAttribute('data-cat');
+          if (state.active.has(cat)) state.active.delete(cat); else state.active.add(cat);
+          btn.classList.toggle('active');
+          renderGrid();
+        });
+      });
+    }
+
+    function renderGrid(){
+      let xs = state.articles.slice();
+      if (state.active.size>0) xs = xs.filter(p => state.active.has(p.category));
+      const needle = (state.q||'').toLowerCase();
+      if (needle) xs = xs.filter(p => (p.title + ' ' + (p.subtitle||'') + ' ' + (p.category||'')).toLowerCase().includes(needle));
+      switch(state.sort){
+        case 'date_asc': xs.sort((a,b)=> new Date(a.date||0)-new Date(b.date||0)); break;
+        case 'title_asc': xs.sort((a,b)=> (a.title||'').localeCompare(b.title||'')); break;
+        case 'title_desc': xs.sort((a,b)=> (b.title||'').localeCompare(a.title||'')); break;
+        default: xs.sort((a,b)=> new Date(b.date||0)-new Date(a.date||0));
+      }
+      grid.innerHTML = xs.map(p=>`
+        <a class="card" href="${p.path}">
+          <div class="thumb" style="background-image:url('${p.hero||'assets/latest-1.jpg'}')"></div>
+          <div class="pad">
+            <div class="badge">${(p.category||'Article').toUpperCase()} • Coming soon</div>
+            <h3>${p.title}</h3>
+            <p class="badge">${p.subtitle||''}</p>
+            <p class="byline">${byline(p)}</p>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    function init(all){
+      state.articles = all;
+      renderPills(all.map(p=>p.category));
+      renderGrid();
+      q.addEventListener('input', e=>{ state.q = e.target.value; renderGrid(); });
+      sort.addEventListener('change', e=>{ state.sort = e.target.value; renderGrid(); });
+    }
+
+    try {
+      fetch('data/articles.json').then(r=>r.json()).then(d=> init(d.posts)).catch(()=> init(EMBED.posts));
+    } catch (_){
+      init(EMBED.posts);
+    }
+  </script>
+</body>
+</html>

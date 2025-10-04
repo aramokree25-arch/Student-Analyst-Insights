@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Student Analyst Insights</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="assets/logo.png" />
+
+  <style>
+    .byline{ font-size:12px; color:var(--muted); margin-top:-2px }
+    .contact-form{ display:grid; grid-template-columns:1fr 1fr; gap:8px }
+    .contact-form textarea{ grid-column:1/-1 }
+    .contact-form input, .contact-form textarea{
+      border:1px solid var(--border); border-radius:12px; padding:10px 12px; background:#fff;
+    }
+    .contact-form button{ grid-column:1/-1; justify-self:start }
+    .small{ font-size:12px; color:var(--muted) }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html"><img src="assets/logo.png" alt="logo"><span>Student Analyst Insights</span></a>
+      <button id="navToggle" class="nav-toggle" aria-label="Toggle menu">☰</button>
+      <nav class="menu" id="menu">
+        <a class="menu-item active" href="index.html">Home</a>
+        <a class="menu-item" href="articles.html">Articles</a>
+        <a class="menu-item" href="team.html">Meet the Team</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero"></section>
+
+  <main class="container">
+    <!-- About -->
+    <section class="panel">
+      <h2>About</h2>
+      <p>Coming soon</p>
+    </section>
+
+    <!-- Latest Articles -->
+    <section class="panel">
+      <div class="section-head">
+        <h2>Latest Articles</h2>
+        <input id="searchInput" class="search" type="search" placeholder="Search…">
+      </div>
+      <div id="grid" class="card-grid"></div>
+    </section>
+
+    <!-- Subscribe -->
+    <section class="panel">
+      <h2>Subscribe</h2>
+      <p>...</p>
+      <form id="newsletterForm" class="newsletter-form">
+        <input type="email" placeholder="you@example.com" required>
+        <button class="btn" type="submit">Subscribe</button>
+      </form>
+      <p id="newsletterThanks" class="success hidden">Thanks — you’re on the list (local only).</p>
+    </section>
+
+    <!-- Contact -->
+    <section class="panel" id="contact">
+      <h2>Contact</h2>
+      <p>
+        Contact us:
+        <a id="contactEmail" href="mailto:contact@studentanalystinsights.com">
+          contact@studentanalystinsights.com
+        </a>
+      </p>
+      <form id="contactForm" class="contact-form">
+        <input type="text" id="cName" placeholder="Your name" required>
+        <input type="email" id="cFrom" placeholder="Your email" required>
+        <input type="text" id="cSubject" placeholder="Subject">
+        <textarea id="cMessage" rows="4" placeholder="Message"></textarea>
+        <button class="btn" type="submit">Open email draft</button>
+      </form>
+      <p class="small">...</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Student Analyst Insights</div>
+      <div class="foot-links">
+        <a href="index.html">Home</a>
+        <a href="articles.html">Articles</a>
+        <a href="team.html">Meet the Team</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav + footer year
+    document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('menu').classList.toggle('open'));
+    document.getElementById('year').textContent=new Date().getFullYear();
+
+    // INLINE DATA (works offline)
+const DATA = {
+  "posts": [
+    {"id":"p1","slug":"market-recap","category":"TBC","title":"Coming Soon","subtitle":"Coming soon","hero":"assets/latest-1.jpg","date":"TBC","authors":["TBC"],"editor":"TBC","path":"posts/market-recap.html"},
+    {"id":"p2","slug":"highlighted-deal","category":"TBC","title":"Coming Soon","subtitle":"Coming soon","hero":"assets/latest-2.jpg","date":"TBC","authors":["TBC"],"editor":"TBC","path":"posts/highlighted-deal.html"},
+    {"id":"p3","slug":"credit-spreads","category":"TBC","title":"Coming Soon","subtitle":"Coming soon","hero":"assets/latest-3.jpg","date":"TBC","authors":["TBC"],"editor":"TBC","path":"posts/credit-spreads.html"},
+    {"id":"p4","slug":"top-3-ideas","category":"TBC","title":"Coming Soon","subtitle":"Coming soon","hero":"assets/latest-4.jpg","date":"TBC","authors":["TBC"],"editor":"TBC","path":"posts/top-3-ideas.html"},
+    {"id":"p5","slug":"policy-watch","category":"TBC","title":"Coming Soon","subtitle":"Coming soon","hero":"assets/latest-5.jpg","date":"TBC","authors":["TBC"],"editor":"TBC","path":"posts/policy-watch.html"},
+    {"id":"p6","slug":"feature-article","category":"TBC","title":"Coming Soon","subtitle":"Coming soon","hero":"assets/latest-6.jpg","date":"TBC","authors":["TBC"],"editor":"TBC","path":"posts/feature-article.html"}
+  ]
+};
+
+
+    // Helpers for byline
+    const fmt = d => new Date(d).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});
+    const byline = p => {
+      const authors = Array.isArray(p.authors) && p.authors.length ? p.authors.join(', ') : (p.author || '—');
+      const ed = p.editor || '—';
+      const dt = p.date ? fmt(p.date) : '—';
+      return `By ${authors} · Edited by ${ed} · ${dt}`;
+    };
+
+    // Render Latest Articles grid with bylines
+    const grid = document.getElementById('grid');
+    const search = document.getElementById('searchInput');
+    function render(){
+      const q = (search.value||'').toLowerCase();
+      const xs = DATA.posts.slice()
+        .sort((a,b)=> new Date(b.date||0)-new Date(a.date||0))
+        .filter(p => (p.title + ' ' + (p.subtitle||'') + ' ' + (p.category||'')).toLowerCase().includes(q))
+        .slice(0,6);
+
+      grid.innerHTML = xs.map(p => `
+        <a class="card" href="${p.path}">
+          <div class="thumb" style="background-image:url('${p.hero||'assets/latest-1.jpg'}')"></div>
+          <div class="pad">
+            <div class="badge">${(p.category||'Article').toUpperCase()} • Coming soon</div>
+            <h3>${p.title}</h3>
+            <p class="badge">${p.subtitle||''}</p>
+            <p class="byline">${byline(p)}</p>
+          </div>
+        </a>
+      `).join('');
+    }
+    render();
+    search.addEventListener('input', render);
+
+    // Newsletter (local only)
+    document.getElementById('newsletterForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      document.getElementById('newsletterThanks').classList.remove('hidden');
+    });
+
+    // CONTACT panel (mailto)
+    const BUSINESS_EMAIL = 'contact@studentanalystinsights.com'; // change to your real domain email
+    const cform = document.getElementById('contactForm');
+    if (cform){
+      const e = document.getElementById('contactEmail');
+      if (e){ e.href = `mailto:${BUSINESS_EMAIL}`; e.textContent = BUSINESS_EMAIL; }
+
+      cform.addEventListener('submit', (ev)=>{
+        ev.preventDefault();
+        const name = document.getElementById('cName').value.trim();
+        const from = document.getElementById('cFrom').value.trim();
+        const subj = document.getElementById('cSubject').value.trim() || 'Website enquiry';
+        const msg  = document.getElementById('cMessage').value.trim();
+        const body = encodeURIComponent(`Name: ${name}\nEmail: ${from}\n\n${msg}`);
+        window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${encodeURIComponent(subj)}&body=${body}`;
+      });
+    }
+  </script>
+</body>
+</html>
+
