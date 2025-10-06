@@ -38,3 +38,110 @@ h3{margin:0;font-size:18px}
 .post-body{line-height:1.65}
 .post-body img{border-radius:12px;border:1px solid var(--border)}
 @media (max-width:820px){.menu{display:none;position:absolute;top:58px;right:16px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px;flex-direction:column;gap:6px}.nav-toggle{display:block}.menu.open{display:flex}}
+
+
+/* --- Article (pro finance look) ---------------------------------------- */
+.post { max-width: clamp(780px, 68vw, 1000px); margin: 0 auto; }.post-card { background: var(--card); border:1px solid var(--border); border-radius:18px; padding:22px; }
+.post-hero-img{
+  height: 280px; border-radius:18px; border:1px solid var(--border);
+  background: linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.25)),
+              url("../assets/latest-1.jpg") center/cover no-repeat;
+  margin: 22px auto; max-width: 1000px;
+}
+.post-head h1{ margin:0 0 6px; font-size:32px; }
+.post-meta{ display:flex; flex-wrap:wrap; gap:10px; color:var(--muted); font-size:13px; }
+.post-meta span{ position:relative; padding-right:12px; }
+.post-meta span:not(:last-child)::after{ content:"·"; position:absolute; right:2px; color:var(--muted); }
+.post-body{ line-height:1.75; font-size:16px; }
+.post-body h2{ font-size:22px; margin:22px 0 8px; }
+.post-sep{ border:none; border-top:1px solid var(--border); margin:16px 0; }
+figure{ margin:12px 0 18px; }
+.figure{ border:1px solid var(--border); border-radius:12px; background:#fff; padding:10px; }
+.figure img{ width:100%; height:auto; display:block; border-radius:8px; }
+figcaption{ margin-top:6px; font-size:12px; color:var(--muted); }
+.note{ border-left:3px solid var(--brand); background:#fff; padding:10px 12px; border-radius:10px; margin:12px 0; font-size:14px; color:var(--text); }
+.post table{ width:100%; border-collapse:collapse; margin:10px 0; font-size:14px; }
+.post th, .post td{ border:1px solid var(--border); padding:8px; text-align:left; }
+.post th{ background:#f6f7fb; }
+@media (max-width:820px){
+  .post-card{ padding:16px; }
+  .post-head h1{ font-size:26px; }
+}
+/* --- Article spacing + charts polish ----------------------------------- */
+
+/* Reading width (pick one you like) */
+.post { max-width: 900px; margin: 0 auto; }    /* was 760px */
+
+/* Paragraph rhythm */
+.post-body p { 
+  margin: 12px 0 18px;                         /* more separation between paragraphs */
+}
+
+/* Section spacing */
+.post-body h2 {
+  margin: 34px 0 10px;                         /* larger buffer before each section */
+  line-height: 1.25;
+}
+
+/* Short, subtle rule under the header */
+.post-sep { 
+  border: none;
+  height: 0;
+  margin: 14px 0 18px;
+}
+.post-sep.short {
+  border-top: 2px solid var(--border);         /* thin and tidy line */
+  width: 120px;                                /* not full width */
+  opacity: .6;
+}
+
+/* Figure / chart sizing */
+figure { margin: 16px 0 28px; }
+
+.figure {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  padding: 10px;
+}
+
+/* Keep charts crisp but not huge */
+.figure img {
+  width: 100%;
+  height: auto;
+  max-height: 420px;                           /* cap height so it doesn't overwhelm */
+  object-fit: contain;                          /* no stretching */
+}
+
+/* Optional utilities if you want smaller/taller charts per figure */
+.figure--sm img { max-height: 320px; }
+.figure--lg img { max-height: 520px; }
+
+/* ===== Article: CME-style polish ===== */
+.post            { max-width: 920px; margin: 0 auto; }          /* comfy reading width */
+.post-card       { padding: 28px 36px; }                        /* more breathing room */
+
+.eyebrow         { text-transform: uppercase; letter-spacing:.04em; font-weight:600;
+                   color: var(--muted); font-size:12px; margin-bottom:6px; }
+.post-head h1    { margin: 0 0 8px; font-size: 34px; line-height: 1.2; }
+.byline-row      { display:flex; flex-wrap:wrap; gap:10px; color:var(--muted); font-size:13px; }
+.rule            { height:1px; background:var(--border); width:120px; opacity:.7; margin:16px 0 20px; }
+
+.kicker          { font-size:18px; color:#2f2f2f; line-height:1.65; margin:0 0 22px; } /* standfirst */
+.post-body h2    { font-size:24px; margin:36px 0 10px; line-height:1.3; }
+.post-body p     { margin:12px 0 18px; }                           /* paragraph separation */
+
+figure           { margin:16px 0 28px; }
+.figure          { border:1px solid var(--border); border-radius:12px; background:#fff;
+                   padding:10px; box-shadow:0 1px 0 rgba(0,0,0,.03); }
+.figure img      { display:block; width:100%; height:auto; max-width:740px; margin:0 auto; }
+.figure--narrow img { max-width:620px; }     /* use when you want smaller charts */
+.figure--wide img   { max-width:860px; }     /* rare: big hero-type charts */
+.caption         { color:var(--muted); font-size:12px; text-align:center; margin-top:6px; }
+
+.pullquote       { max-width:740px; margin:24px auto; padding:16px 20px; background:#fff;
+                   border-left:3px solid var(--brand); border-radius:10px; font-size:18px; line-height:1.5; }
+
+/* Hero */
+.post-hero-img   { height:320px; border-radius:18px; border:1px solid var(--border);
+                   margin:22px auto; max-width:1200px; }
