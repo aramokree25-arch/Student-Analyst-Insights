@@ -145,3 +145,18 @@ figure           { margin:16px 0 28px; }
 /* Hero */
 .post-hero-img   { height:320px; border-radius:18px; border:1px solid var(--border);
                    margin:22px auto; max-width:1200px; }
+.member .avatar{
+  width: 220px;              /* pick your size */
+  aspect-ratio: 1 / 1;       /* keep it square */
+  object-fit: cover;         /* zoom/crop like a headshot */
+  object-position: 50% 28%;  /* center & nudge up toward the face */
+  border-radius: 50%;        /* circular avatar (optional) */
+  display: block;
+  margin: 0 auto;            /* center the image in the article */
+}
+.member{
+  text-align: center;        /* center the text too */
+}
+.member .bio{
+  margin-top: 0.75rem;
+}
