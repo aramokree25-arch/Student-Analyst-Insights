@@ -160,3 +160,50 @@ figure           { margin:16px 0 28px; }
 .member .bio{
   margin-top: 0.75rem;
 }
+/* About section polish */
+.panel.about p {
+  margin: 0.75rem 0;
+  line-height: 1.6;
+}
+
+.about-block {
+  margin: 0.75rem 0 1rem;
+  padding: 0.75rem 0.9rem;
+  background: rgba(0,0,0,0.03);
+  border-radius: 12px;
+}
+
+.about-label {
+  margin: 0 0 0.35rem;
+  font-weight: 600;
+}
+
+.about-list {
+  margin: 0;
+  padding-left: 1.1rem;      /* controls indent */
+  list-style-position: outside;
+}
+
+.about-list li {
+  margin: 0.3rem 0;
+}
+
+.about-list li em {
+  opacity: 0.75;             /* subtle “coming soon” */
+}
+
+.about-goal {
+  margin-top: 0.9rem;
+}
+
+.disclaimer {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  font-size: 0.92rem;
+  opacity: 0.85;
+}
+
+.disclaimer em {
+  font-style: italic;
+}
